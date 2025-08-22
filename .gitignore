@@ -1,0 +1,23 @@
+# Ignorar archivos de datos grandes
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
