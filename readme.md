@@ -8,7 +8,7 @@ g++ -std=gnu++17 -O2 mlp_infer_plain.cpp  -o mlp_infer_plain
 
 
 # 1) Generar df_all.csv desde ./market_data
-```bash
+```
 ./process_market --dir ./market_data
 ```
 
