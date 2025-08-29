@@ -12,11 +12,31 @@ g++ -std=gnu++17 -O2 mlp_infer_plain.cpp  -o mlp_infer_plain
 ./process_market --dir ./market_data
 ```
 
-# 2) Generar xy_train.csv (features/label) y estimar p_next_hat
+## Que hace?
+
+- Lee todos los archivos .csv ./market_data.
+- Cada CSV se asocia a un instrumento y contiene fecha_nano, price, quantity, side.
+- Agrupa las filas por timestamp (fecha_nano) y side (BI, OF, TRADE).
+- Calcula métricas por grupo: VWAP (promedio ponderado) y spread (desvío ponderado).
+- Construye un dataframe global que junte todo, con columnas instrument, side, fecha_nano, ts_sec, vwap, spread.
+- Escribe ese dataframe consolidado en df_all.csv.
+
+# 2) Generar xy_train.csv (features/label)
+Con una regresion lineal univariada
 ```bash
 ./get_nowcast --df df_all.csv --target "AL30_1205_CI_CCL" --k_last 3 --top_others 4 --dt_median_window 20 --xy_out xy_train.csv
-
 ```
+
+## Que hace?
+
+- Lee df_all.csv y carga todas las filas de trades (instrument, ts_sec, vwap).
+- Organiza los trades por instrumento, ordenados en el tiempo, eliminando duplicados.
+- Selecciona el instrumento target y los top_others más líquidos como features adicionales.
+- Para cada instante t0 del target, ajusta una recta local con los últimos k_last puntos.
+- Extrae como features los precios estimados (p__...) y pendientes (m__...) de target y otros instrumentos.
+- Define como label (y) la pendiente futura del target en el próximo trade y como X la matriz de precios estimados y pendientes (p__ y m__)
+- Guarda el dataset completo en xy_train.csv para input a algoritmo de prediccion (perceptron multicapa)
+- Nota: dt_median_window quedó como un bug, no afecta al algoritmo
 
 # 3) Inferencia/Evaluación MLP
 ```bash

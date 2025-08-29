@@ -21,3 +21,6 @@ ENV/
 # Archivos del sistema
 .DS_Store
 Thumbs.db
+
+# Otras carpetas
+old/
