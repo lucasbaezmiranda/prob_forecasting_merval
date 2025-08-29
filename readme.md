@@ -1,11 +1,11 @@
 # Pipeline HFT — Build & Run (mínimo)
 
-# Compilar
+## Compilar
 ```bash
 g++ -std=gnu++17 -O2 process_market.cpp   -o process_market
-g++ -std=gnu++17 -O2 predict_next.cpp     -o predict_next
+g++ -std=gnu++17 -O2 get_nowcast.cpp      -o get_nowcast
 g++ -std=gnu++17 -O2 mlp_infer_plain.cpp  -o mlp_infer_plain
-```
+
 
 # 1) Generar df_all.csv desde ./market_data
 ```bash
@@ -14,7 +14,8 @@ g++ -std=gnu++17 -O2 mlp_infer_plain.cpp  -o mlp_infer_plain
 
 # 2) Generar xy_train.csv (features/label) y estimar p_next_hat
 ```bash
-./predict_next --df df_all.csv --target "<INSTRUMENTO>" --k_last 3 --top_others 4 --dt_median_window 20 --xy_out xy_train.csv
+./get_nowcast --df df_all.csv --target "AL30_1205_CI_CCL" --k_last 3 --top_others 4 --dt_median_window 20 --xy_out xy_train.csv
+
 ```
 
 # 3) Inferencia/Evaluación MLP
