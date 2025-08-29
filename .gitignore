@@ -1,5 +1,4 @@
 # Ignorar archivos de datos grandes
-*.csv
 
 # Python
 __pycache__/
