@@ -5,7 +5,7 @@
 g++ -std=gnu++17 -O2 process_market.cpp   -o process_market
 g++ -std=gnu++17 -O2 get_nowcast.cpp      -o get_nowcast
 g++ -std=gnu++17 -O2 mlp_infer_plain.cpp  -o mlp_infer_plain
-
+```
 
 # 1) Generar df_all.csv desde ./market_data
 ```
