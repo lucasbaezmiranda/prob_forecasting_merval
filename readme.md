@@ -6,6 +6,19 @@ g++ -std=gnu++17 -O2 process_market.cpp   -o process_market
 g++ -std=gnu++17 -O2 get_nowcast.cpp      -o get_nowcast
 g++ -std=gnu++17 -O2 mlp_infer_plain.cpp  -o mlp_infer_plain
 ```
+# 0) Descargar información (market_data/)
+Info de market_data 
+- AL30_1205_CI_CCL.csv
+- AL30_1205_CI_PESOS.csv
+- PESOS-1305.csv
+- AL30_1205_CI_MEP.csv
+- dlr_may_1205.csv
+
+
+```
+bash download_csv.sh
+```
+Alternativa: link de google drive, la carpeta https://drive.google.com/drive/folders/1esgHC9DvJcIBqAhPJxYp_u7kPsAybx45?usp=drive_link
 
 # 1) Generar df_all.csv desde ./market_data
 ```
