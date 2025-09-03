@@ -238,16 +238,37 @@ int main(int argc, char** argv){
             cerr<<"[ERROR] d="<<d<<" != n_features del modelo "<<B.n_features<<"\n";
             return 1;
         }
+
+        // medir tiempo de inferencia
+        auto t0 = chrono::high_resolution_clock::now();
         auto yhat = mlp_predict(B, X, n);
+        auto t1 = chrono::high_resolution_clock::now();
+
+        // calcular métricas
         auto [mse, r2] = mse_r2(y, yhat);
         cout.setf(std::ios::fixed); cout<<setprecision(10);
-        cout<<"MSE="<<mse<<"  R2="<<r2<<"\n";
-        // imprimir primeras 5 predicciones
-        for(int i=0;i<min(n,5);++i){
+        
+
+        // tiempos
+        double elapsed_ms = chrono::duration<double, milli>(t1 - t0).count();
+        double per_row_us = (n > 0) ? (elapsed_ms * 1000.0 / n) : 0.0;  // microsegundos por fila
+
+        
+
+        // cantidad a imprimir (por defecto 5)
+        int n_print = 5;
+        if(argc >= 5) n_print = stoi(argv[4]);
+
+        for(int i=0;i<min(n,n_print);++i){
             cout<<"i="<<i<<"  y="<<y[i]<<"  yhat="<<yhat[i]<<"\n";
         }
+        cout<<"\nMSE="<<mse<<"  R2="<<r2<<"\n";
+        cout<<"Tiempo total de inferencia: "<<elapsed_ms<<" ms\n";
+        cout<<"Tiempo promedio por fila: "<<per_row_us<<" us\n";
         return 0;
-    }else if(argc>=3){
+    }
+
+    else if(argc>=3){
         // caso: X_only.csv (sin y), con header
         string x_path = argv[2];
         ifstream fin(x_path);

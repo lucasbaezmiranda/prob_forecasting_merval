@@ -14,11 +14,11 @@ Info de market_data
 - AL30_1205_CI_MEP.csv
 - dlr_may_1205.csv
 
-
+Crea carpeta market_data si no existe y descarga los csvs
 ```
 bash download_csv.sh
 ```
-Alternativa: link de google drive, la carpeta https://drive.google.com/drive/folders/1esgHC9DvJcIBqAhPJxYp_u7kPsAybx45?usp=drive_link
+Alternativa: link de google drive, la carpeta https://drive.google.com/drive/folders/1esgHC9DvJcIBqAhPJxYp_u7kPsAybx45?usp=drive_link, quiza pida autorización
 
 # 1) Generar df_all.csv desde ./market_data
 ```
@@ -81,4 +81,6 @@ Con una regresion lineal univariada
 - Carga `mlp_bundle.txt` (activación, `n_features`, scaler, capas `W/b`).
 - Lee `--eval xy_train.csv` (con `y`) o `X_only.csv` (solo features).
 - Estandariza con el scaler del bundle y hace forward MLP (activación en ocultas, salida lineal).
-- `--eval`: reporta **MSE** y **R²** + 5 predicciones; con `X_only.csv`: una predicción por línea.
+- `--eval`: reporta **MSE** y **R²** + 5 predicciones por defecto; con `X_only.csv`: una predicción por línea.
+- Agregado: Reporta el tiempo promedio de inferencia de cada fila, el tiempo de ejecucion de la función mlp_predict
+- Agregado: Al final se le dicen cuantas lineas se quieren predecir
