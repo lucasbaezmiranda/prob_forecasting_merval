@@ -53,8 +53,7 @@ Con una regresion lineal univariada
 
 # 3) Inferencia/Evaluación MLP
 ```bash
-./mlp_infer_plain mlp_bundle.txt --eval xy_train.csv    # eval: MSE, R2, 5 primeras
-./mlp_infer_plain mlp_bundle.txt X_only.csv             # solo predicciones (una por línea)
+./mlp_infer_plain mlp_bundle.txt --eval xy_train.csv 10   # eval: MSE, R2, tiempo promedio de inferencia para 10 primeras
 ```
 
 
